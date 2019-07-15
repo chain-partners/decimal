@@ -63,6 +63,7 @@ defmodule Decimal do
   import Bitwise
   import Kernel, except: [abs: 1, div: 2, max: 2, min: 2, rem: 2, round: 1]
   import Decimal.Macros
+  require Logger
 
   @power_of_2_to_52 4_503_599_627_370_496
 
@@ -1238,7 +1239,7 @@ defmodule Decimal do
     do: %Decimal{sign: if(int < 0, do: -1, else: 1), coef: Kernel.abs(int)}
 
   def new(float) when is_float(float) do
-    IO.warn(
+    Logger.warn(
       "passing float to Decimal.new/1 is deprecated as floats have inherent inaccuracy. Use Decimal.from_float/1 or Decimal.cast/1 instead"
     )
 
